@@ -6,19 +6,20 @@ from urllib.parse import urlparse
 import requests
 
 
-class SlowChain(object):
-    def __init__(self) -> None:
+class SlowChain:
+    def __init__(self):
         self.chain = []
         self.transactions = []
         self.nodes = set()
-
         self.add_block_to_chain(self.create_block(proof=100, previous_hash=1))
 
     @property
     def previous_block(self):
+        # to get last block on slow chain
         return self.chain[-1]
 
     def create_block(self, proof, previous_hash=None):
+        # for create a block of transactions
         block = {
             'pk': len(self.chain) + 1,
             'date_time': time(),
@@ -29,6 +30,7 @@ class SlowChain(object):
         return block
 
     def add_block_to_chain(self, block):
+        # for add a block to slow chain
         self.transactions = []
         self.chain.append(block)
 
